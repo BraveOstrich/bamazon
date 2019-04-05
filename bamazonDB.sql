@@ -25,8 +25,8 @@ VALUES (1, "Battlefield", "Video Game", 49.99, 10),
 (10, "Swiffer Wet Jet", "Cleaning", 19.99, 10);
 
 
-UPDATE products SET department_name="Cooking"
-WHERE department_name="";
+UPDATE products SET stock_quantity="5"
+WHERE product_name="Cast Iron Skillet";
 
 
 
