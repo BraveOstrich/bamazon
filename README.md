@@ -7,3 +7,4 @@ You are able to select the item you would like to purchase, then select the quan
 See the GIF below for a demonstration.
 
 ![Bamazon App GIF](images/bamazon-app.gif)
+ The GIF seems to run slower than the video it was made from.
