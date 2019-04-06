@@ -49,7 +49,7 @@ function start(res){
         {
             name: "item_id" ,
             type: "input",
-            message: "What is the item ID of the product you would like to buy?",
+            message: "|| - What is the index number of the product you would like to buy? - ||",
             validate: function(value){
                 return((value >= 0) && (value < res.length));
             }
@@ -57,7 +57,7 @@ function start(res){
         {
             name: "quantity",
             type: "input",
-            message: "How many would you like to buy?",
+            message: "|| - How many would you like to buy? - ||",
             validate: function(value){
                 return (value > 0)
             }
@@ -65,19 +65,19 @@ function start(res){
         }
     ])
     .then (function(answer){
-        if (answer.item_id >= 0 && answer.item_id < res.length){
-            if (res [answer.item_id].stock_quantity >= answer.quantity){
-                var remaining = res[answer.item_id].stock_quantity - answer.quantity;
-                totalCost = answer.quantity * res[answer.item_id].price;
-                console.log("Your total cost is: $" + parseFloat(totalCost).toFixed(2));
-                var bamazonReport = "UPDATE products SET ? WHERE ?"
-                connection.query(bamazonReport, [{stock_quantity : remaining}, {item_id: +answer.item_id+1}], function(err, response){
-                displayItems();   
-                });
-        } else {
-            console.log("Insufficient quantity to purchase " + res [answer.item_id].stock_quantity);
-            displayItems();
+            if (answer.item_id >= 0 && answer.item_id < res.length){
+                if (res [answer.item_id].stock_quantity >= answer.quantity){
+                    var remaining = res[answer.item_id].stock_quantity - answer.quantity;
+                    totalCost = answer.quantity * res[answer.item_id].price;
+                    console.log("|| - Your total cost is: $" + parseFloat(totalCost).toFixed(2) + " - ||");
+                    var bamazonReport = "UPDATE products SET ? WHERE ?"
+                    connection.query(bamazonReport, [{stock_quantity : remaining}, {item_id: +answer.item_id+1}], function(err, response){
+                    displayItems();   
+                    });
+            } else {
+                console.log("|| - Insufficient quantity, there are " + res [answer.item_id].stock_quantity + " available for purchase - ||");
+                displayItems();
+            }
         }
-    }
     });
 };
